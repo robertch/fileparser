@@ -46,8 +46,13 @@ def _list__( file : File):List[File] = {
     }
     list
   }
-  def readFile(file: File) = {
-    Source.fromFile(file.getAbsolutePath).getLines.foreach(x => println(x))
+  def readFileLines(file: File) = {
+      getFileSource(file)
+      .getLines
+      .foreach(x => println(x))
+  }
+  def getFileSource(file:File) ={
+    Source.fromFile(file.getAbsolutePath)
   }
 }
 object IO {
@@ -59,7 +64,11 @@ object IO {
     val lista = io._list_(io.dir)
       // lista.foreach{ x => println(x.getAbsolutePath) }
       println("+++++++++++++++++++++++++++++++++++++")
-      println(lista(1000))
+      val file = lista(1000)
+      println(file)
       // io.readFile(lista(1000))
+      val chars = io.getFileSource(file).toList
+      println(chars.length)
+      println(chars)
   }
 }
